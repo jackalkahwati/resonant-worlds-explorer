@@ -2,6 +2,13 @@
 
 > **AI-powered exoplanet detection and biosignature analysis system**
 
+### 🚀 NASA Space Apps Challenge 2025 Submission
+**Challenge**: [A World Away - Hunting for Exoplanets with AI](https://www.spaceappschallenge.org/)  
+**Event Date**: October 4-5, 2025  
+**Difficulty**: Advanced
+
+---
+
 A complete end-to-end platform for discovering exoplanets and searching for signs of extraterrestrial life using NASA data, advanced transit detection algorithms, and exact AI-powered physics validation.
 
 [![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/downloads/)
@@ -9,6 +16,7 @@ A complete end-to-end platform for discovering exoplanets and searching for sign
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-green.svg)](https://fastapi.tiangolo.com/)
 [![React](https://img.shields.io/badge/React-18.0+-61DAFB.svg)](https://reactjs.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![NASA Space Apps](https://img.shields.io/badge/NASA-Space%20Apps%202025-0B3D91.svg)](https://www.spaceappschallenge.org/)
 
 ---
 
@@ -197,11 +205,16 @@ For detailed architecture, see [backend/ARCHITECTURE.md](backend/ARCHITECTURE.md
 
 ## 📚 Documentation
 
+### NASA Space Apps Challenge
+- **[NASA_SPACE_APPS_CHALLENGE.md](NASA_SPACE_APPS_CHALLENGE.md)** - **Complete challenge submission documentation** 🚀
+
+### Technical Documentation
 - **[SYSTEM_COMPLETE.md](SYSTEM_COMPLETE.md)** - Complete system summary
 - **[GETTING_STARTED.md](GETTING_STARTED.md)** - Detailed installation guide
 - **[API_INTEGRATION_GUIDE.md](API_INTEGRATION_GUIDE.md)** - API documentation
 - **[backend/ARCHITECTURE.md](backend/ARCHITECTURE.md)** - Technical architecture
 - **[BIOSIGNATURE_DETECTION.md](BIOSIGNATURE_DETECTION.md)** - Biosignature methods
+- **[RESEARCH_PAPER.md](RESEARCH_PAPER.md)** - Full scientific methodology
 - **[system_overview.py](system_overview.py)** - Interactive system overview script
 
 ---
@@ -278,8 +291,17 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- **NASA** - For making Kepler, TESS, and JWST data publicly available
+### NASA Space Apps Challenge 2025
+This project was created for the **2025 NASA Space Apps Challenge** (October 4-5, 2025).
+
+**Challenge**: A World Away - Hunting for Exoplanets with AI  
+**Funded by**: NASA's Earth Science Division through a contract with Booz Allen Hamilton, Mindgrub, and SecondMuse.
+
+### Data & Tools
+- **NASA** - For making Kepler, TESS, K2, and JWST data publicly available through MAST
+- **NASA Exoplanet Archive** - Comprehensive catalog of confirmed planets and candidates
 - **lightkurve** - Excellent Python package for light curve analysis
+- **astroquery** - NASA archive access tools
 - **Modulus** - Exact AI for physics computation
 - **The exoplanet community** - For decades of groundbreaking research
 
