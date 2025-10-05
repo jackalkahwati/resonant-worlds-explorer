@@ -16,8 +16,10 @@ export interface Candidate {
   baselineProbability: number;
   baselineFlags: string[];
   description: string;
+  simplifiedDescription?: string;
   isConfirmed: boolean;
   isFalsePositive: boolean;
+  confidence?: number;
 }
 
 export const sampleCandidates: Candidate[] = [

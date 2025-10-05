@@ -1,6 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
 import { Telescope } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ModeToggle } from "./ModeToggle";
+import { useMode } from "@/contexts/ModeContext";
 
 const navItems = [
   { name: "Home", path: "/" },
@@ -25,7 +27,15 @@ export const Navigation = () => {
           </Link>
 
           <div className="hidden md:flex items-center gap-1">
-            {navItems.map((item) => (
+            {navItems
+              .filter((item) => {
+                const { mode } = useMode();
+                if (mode === "explorer") {
+                  return !["Compare"].includes(item.name);
+                }
+                return true;
+              })
+              .map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
@@ -39,6 +49,19 @@ export const Navigation = () => {
                 {item.name}
               </Link>
             ))}
+            <div className="ml-2 flex items-center gap-2">
+              <ModeToggle />
+              {useMode().mode === "researcher" && (
+                <Link
+                  to="/public/Resonant_Worlds_Explorer_Report.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 rounded-md text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90"
+                >
+                  Read Research Report
+                </Link>
+              )}
+            </div>
           </div>
 
           <div className="md:hidden">

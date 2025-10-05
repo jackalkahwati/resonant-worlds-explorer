@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Telescope, Database, Brain, TrendingUp, Download, Rocket } from "lucide-react";
+import { Telescope, Database, Brain, TrendingUp, Download, Rocket, FileText, Microscope } from "lucide-react";
 import { StorytellingWalkthrough } from "@/components/StorytellingWalkthrough";
+import { WelcomeMessage } from "@/components/WelcomeMessage";
+import { ResearcherOnly } from "@/components/ResearcherOnly";
+import { useExplorerMode } from "@/hooks/useFeatureFlag";
 import heroImage from "@/assets/hero-exoplanet.jpg";
 
 const Home = () => {
