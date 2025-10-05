@@ -16,28 +16,29 @@ const Detect = () => {
   const [results, setResults] = useState<Candidate[]>([]);
   const [selectedCandidate, setSelectedCandidate] = useState<Candidate | null>(null);
   const [showComparison, setShowComparison] = useState(false);
-  const isExplorer = useExplorerMode();
+  const isExplorerMode = useExplorerMode();
 
   const handleRunDemo = (candidateIndex?: number) => {
     setIsProcessing(true);
     setShowComparison(false);
-    toast.info(
-      isExplorer
-        ? "Starting discovery..."
-        : "Starting analysis..."
+    toast.info(isExplorerMode 
+      ? "Starting discovery process..." 
+      : "Starting analysis on pre-loaded sample data..."
     );
-
+    
     setTimeout(() => {
       setIsProcessing(false);
       setResults(sampleCandidates);
+      
       if (candidateIndex !== undefined) {
         setSelectedCandidate(sampleCandidates[candidateIndex]);
       }
+      
       const genuineCount = sampleCandidates.filter(c => !c.isFalsePositive).length;
-      toast.success(
-        isExplorer 
-          ? `Found ${genuineCount} potential exoplanet${genuineCount !== 1 ? 's' : ''}!`
-          : `Analysis complete!`
+      
+      toast.success(isExplorerMode
+        ? `Discovery complete! Found ${genuineCount} potential exoplanet${genuineCount !== 1 ? 's' : ''}!`
+        : `Analysis complete! Found ${sampleCandidates.length} candidates (${genuineCount} genuine, ${sampleCandidates.filter(c => c.isFalsePositive).length} false positive).`
       );
     }, 2000);
   };
@@ -51,51 +52,80 @@ const Detect = () => {
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">
-          {isExplorer ? "Discover Exoplanets" : "Transit Detection"}
+          {isExplorerMode ? "Discover Exoplanets" : "Transit Detection"}
         </h1>
         <p className="text-muted-foreground mb-4">
-          {isExplorer 
-            ? "Start your journey of discovery"
-            : "Analyze light curves for transit signals"
+          {isExplorerMode 
+            ? "Start your journey of discovery using our pre-loaded sample data"
+            : "Run analysis on pre-loaded sample data or upload your own light curves"
           }
         </p>
       </div>
 
       <div className="grid lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-1">
+        {/* Left Panel - Input */}
+        <div className="lg:col-span-1 space-y-6">
           <Card>
             <CardHeader>
               <CardTitle>Data Source</CardTitle>
               <CardDescription>
-                {isExplorer 
-                  ? "Start with sample data"
-                  : "Choose data source"
+                {isExplorerMode 
+                  ? "Start with our curated sample datasets"
+                  : "Choose where to load light curve data"
                 }
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
+                <div>
+                  <Label>Sample Dataset</Label>
+                  <Select defaultValue="kepler">
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="kepler">Kepler Sample Data</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <ResearcherOnly>
+                  <div className="pt-4 border-t">
+                    <Label>Advanced Options</Label>
+                    <div className="grid grid-cols-2 gap-4 mt-2">
+                      <Button variant="outline" size="sm">
+                        Custom Parameters
+                      </Button>
+                      <Button variant="outline" size="sm">
+                        Upload Data
+                      </Button>
+                    </div>
+                  </div>
+                </ResearcherOnly>
+
                 <Button 
+                  variant="default" 
                   className="w-full"
                   onClick={() => handleRunDemo()}
                   disabled={isProcessing}
                 >
                   {isProcessing ? (
-                    <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                    <Loader2 className="h-4 w-4 animate-spin" />
                   ) : (
                     <Telescope className="h-4 w-4 mr-2" />
                   )}
-                  {isExplorer ? "Start Discovery" : "Run Analysis"}
+                  {isExplorerMode ? "Start Discovery" : "Run Analysis"}
                 </Button>
               </div>
             </CardContent>
           </Card>
         </div>
 
+        {/* Main Content Area */}
         <div className="lg:col-span-2">
           {results.length > 0 && (
             <>
-              {isExplorer ? (
+              {isExplorerMode ? (
                 <ExplorerResults 
                   results={results}
                   onViewDetails={handleViewComparison}
@@ -115,6 +145,9 @@ const Detect = () => {
                             View Details
                           </Button>
                         </div>
+                        <CardDescription>
+                          {candidate.description}
+                        </CardDescription>
                       </CardHeader>
                     </Card>
                   ))}
